@@ -1,0 +1,216 @@
+[
+  {
+    "itemID": 1,
+    "text": "There is a need to communicate critical data, such as life expectancy and family sizes, to the general public",
+    "photo": "Slide 1",
+    "relations": [
+      {
+        "relationName": "preparation",
+        "role": "satellite",
+        "otherItem": 4
+      }
+    ]
+  },
+    {
+      "itemID": 2,
+      "text": "Western world means long life and small family",
+      "photo": "Slide 1",
+      "relations": [
+        {
+          "relationName": "background",
+          "role": "satellite",
+          "otherItem": 4
+        },
+        {
+          "relationName": "contrast",
+          "role": "element",
+          "otherItem": 3
+        }
+      ]
+    },
+  {
+    "itemID": 3,
+    "text": "Third world means short life and large family",
+    "photo": "Slide 1",
+    "relations": [
+      {
+        "relationName": "contrast",
+        "role": "element",
+        "otherItem": 2
+      }
+    ]
+  },
+  {
+    "itemID": 4,
+    "text": "There have been dramatic demographic and economic changes across the developing world since 1962",
+    "photo": "Slide 1",
+    "relations": [
+      {
+        "relationName": "background",
+        "role": "satellite",
+        "otherItem": 2
+      },
+      {
+        "relationName": "preparation",
+        "role": "nucleus",
+        "otherItem": 1
+      },
+      {
+        "relationName": "background",
+        "role": "nucleus",
+        "otherItem": 13
+      },
+      {
+        "relationName": "background",
+        "role": "nucleus",
+        "otherItem": 14
+      },
+      {
+        "relationName": "evaluation",
+        "role": "nucleus",
+        "otherItem": 11
+      },
+      {
+        "relationName": "evaluation",
+        "role": "nucleus",
+        "otherItem": 9
+      },
+      {
+        "relationName": "evidence",
+        "role": "nucleus",
+        "otherItem": 5
+      }
+    ]
+  },
+  {
+    "itemID": 5,
+    "text": "Latin American countries move towards smaller families",
+    "photo": "Family-size-1971",
+    "relations": [
+      {
+        "relationName": "evidence",
+        "role": "satellite",
+        "otherItem": 4
+      },
+      {
+        "relationName": "sequence",
+        "role": "element",
+        "otherItem": 6
+      }
+    ]
+  },
+  {
+    "itemID": 6,
+    "text": "Life expectancy in China increases with better healthcare",
+    "photo": "Family-size-1971",
+    "relations": [
+      {
+        "relationName": "sequence",
+        "role": "element",
+        "otherItem": 7
+      }
+    ]
+  },
+  {
+    "itemID": 7,
+    "text": "People in Arab countries live longer lives with smaller families",
+    "photo": "Family-size-1971",
+    "relations": [
+      {
+        "relationName": "sequence",
+        "role": "element",
+        "otherItem": 8
+      }
+    ]
+  },
+  {
+    "itemID": 8,
+    "text": "African countries remain largely the same",
+    "photo": "Family-size-1971",
+    "relations": []
+  },
+  {
+    "itemID": 9,
+    "text": "Family Planning reduced family sizes in Bangladesh in the 1980s",
+    "photo": "1989",
+    "relations": [
+      {
+        "relationName": "evaluation",
+        "role": "satellite",
+        "otherItem": 4
+      },
+      {
+        "relationName": "joint",
+        "role": "element",
+        "otherItem": 10
+      }
+    ]
+  },
+  {
+    "itemID": 10,
+    "text": "The HIV epidemic in the 1990s reduced life expectancy in Africa",
+    "photo": "1989",
+    "relations": [
+      {
+        "relationName": "joint",
+        "role": "element",
+        "otherItem": 9
+      }
+    ]
+  },
+  {
+    "itemID": 11,
+    "text": "Asian societies have become wealthier",
+    "photo": "Vietnam-USA",
+    "relations": [
+      {
+        "relationName": "evaluation",
+        "role": "satellite",
+        "otherItem": 4
+      },
+      {
+        "relationName": "background",
+        "role": "nucleus",
+        "otherItem": 12
+      }
+    ]
+  },
+  {
+    "itemID": 12,
+    "text": "Vietnam adopts family planning and free market policies, rapdibly boosting life expectancy",
+    "photo": "Vietnam-USA",
+    "relations": [
+      {
+        "relationName": "background",
+        "role": "satellite",
+        "otherItem": 11
+      }
+    ]
+  },
+  {
+    "itemID": 13,
+    "text": "The gap between rich and poor is less significant now",
+    "photo": "Slide 2",
+    "relations": [
+      {
+        "relationName": "background",
+        "role": "satellite",
+        "otherItem": 4
+      }
+    ]
+  },
+  {
+    "itemID": 14,
+    "text": "Child survival rates are higher in wealthier countries",
+    "photo": "Slide 3",
+    "relations": [
+      {
+        "relationName": "background",
+        "role": "satellite",
+        "otherItem": 4
+      }
+    ]
+  }
+  ]
+
+
