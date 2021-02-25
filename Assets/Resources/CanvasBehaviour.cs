@@ -32,7 +32,7 @@ public class CanvasBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-            
+
     }
 
     void OrderItems()
@@ -42,7 +42,14 @@ public class CanvasBehaviour : MonoBehaviour
 
     void SelectFirstAction()
     {
-        TraverseItems(itemCollection[0]);
+        foreach (Item item in itemCollection)
+        {
+            AllocateInitialRating(item);
+        }
+
+        List<Item> possibleFirstItems = GetPossibleStartingItems(GetMaxScore());
+
+        TraverseItems(TieBreak(possibleFirstItems)); 
     }
 
     void AddItem(Item item)
@@ -70,7 +77,7 @@ public class CanvasBehaviour : MonoBehaviour
 
         while (HasLinksToIncompleteItems(item)) // Problem is item is the third, once the third is over, it needs to refer to the 2nd
         {
-            AllocateRatings(item);
+            AllocateTransitionRatings(item);
             TraverseItems(GetNextItem(item)); // Need item to be item2 when item3 is finished (when it returns to item2's iteration)
         }
     }
@@ -108,16 +115,49 @@ public class CanvasBehaviour : MonoBehaviour
         }
     }
 
-    void AllocateRatings(Item item)
+    void AllocateInitialRating(Item item)
+    {
+        foreach (Relation relation in item.relations)
+        {
+            int ranking = GetInitialRanking(relation);
+
+            if (ranking > item.score)
+            {
+                item.score = ranking;
+            }
+        }
+    }
+
+    int GetInitialRanking(Relation relation)
+    {
+        switch (GetRelationCode(relation))
+        {
+            case "prep-sat":
+                return 2;
+            case "back-nuc":
+                return 1;            
+            case "join-ele":
+                return 0;
+            case "cont-ele":
+                return 0;
+            case "sequ-ele":
+                return 0;            
+            default:
+                return -1;
+        }
+    }
+
+
+    void AllocateTransitionRatings(Item item)
     {
         // Set rankings for each possible path of current item
         foreach (Relation relation in item.relations)
         {
-            SetRelationRankings(relation);
+            SetTransitionRelationRankings(relation);
         }
     }
 
-    void SetRelationRankings(Relation relation)
+    void SetTransitionRelationRankings(Relation relation)
     {
         if (GetRelationItem(relation).completed)
         {
@@ -181,6 +221,39 @@ public class CanvasBehaviour : MonoBehaviour
         return possibleTrans;
     }
 
+    int GetMaxScore()
+    {
+        int maxScore = -1;
+
+        if (itemCollection.Count > 0)
+        {
+            maxScore = itemCollection[0].score;
+        }
+
+        foreach (Item item in itemCollection)
+        {
+            if (item.score > maxScore)
+            {
+                maxScore = item.score;
+            }
+        }
+        return maxScore;
+    }
+
+    List<Item> GetPossibleStartingItems(int maxScore)
+    {
+        List<Item> possibleItems = new List<Item>();
+
+        foreach (Item item in itemCollection)
+        {
+            if(item.score >= maxScore)
+            {
+                possibleItems.Add(item);
+            }
+        }
+        return possibleItems;
+    }
+
     Item TieBreak(List<Relation> possibleTrans)
     {
         Item nextItem = GetRelationItem(possibleTrans[0]);
@@ -192,6 +265,23 @@ public class CanvasBehaviour : MonoBehaviour
             {
                 nextItem = GetRelationItem(relation);
                 maxNumberOfRelations = GetRelationItem(relation).relations.Count;
+            }
+        }
+        return nextItem;
+    }
+
+
+    Item TieBreak(List<Item> possibleItems)
+    {
+        Item nextItem = possibleItems[0];
+        int maxNumberOfRelations = possibleItems[0].relations.Count;
+
+        foreach (Item item in possibleItems)
+        {
+            if(item.relations.Count > maxNumberOfRelations)
+            {
+                nextItem = item;
+                maxNumberOfRelations = item.relations.Count;
             }
         }
         return nextItem;
@@ -216,6 +306,7 @@ public class Item
     public string photo;
     public List<Relation> relations;
     public bool completed = false;
+    public int score = -1;
 }
 
 [System.Serializable]
