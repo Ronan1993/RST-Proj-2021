@@ -306,7 +306,7 @@ public class Item
     public string photo;
     public List<Relation> relations;
     public bool completed = false;
-    public int score = -1;
+    public int score = -1; 
 }
 
 [System.Serializable]
