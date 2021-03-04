@@ -88,6 +88,10 @@ public class UISpringGraphLayout : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+        var rng = new System.Random();
+        float Xoffset;
+        float Yoffset;
+
         int index = 0;
 
         try
@@ -102,15 +106,19 @@ public class UISpringGraphLayout : MonoBehaviour {
 
         foreach (Item item in itemCollection) {
 
+            Xoffset = (float)rng.NextDouble() * transform.parent.gameObject.GetComponent<RectTransform>().rect.width;
+            Yoffset = (float)rng.NextDouble() * transform.parent.gameObject.GetComponent<RectTransform>().rect.height;
+
             GameObject itemObj = new GameObject("Item " + item.itemID);
             itemObj.AddComponent<RectTransform>();
             itemObj.GetComponent<RectTransform>().SetParent(transform);
-            itemObj.transform.Translate(new Vector3(index, index, 0));
+            itemObj.transform.Translate(new Vector3(Xoffset, Yoffset, 0));
 
             GameObject imageObj = new GameObject("Image for Slide " + item.itemID);
             Image image = imageObj.AddComponent<Image>();
             image.sprite = Resources.Load<Sprite>(item.photo);
             imageObj.GetComponent<RectTransform>().SetParent(itemObj.transform);
+            imageObj.transform.Translate(new Vector3(Xoffset, Yoffset, 0));
             imageObj.SetActive(true);
 
             // Make spacing smaller now
@@ -122,6 +130,7 @@ public class UISpringGraphLayout : MonoBehaviour {
             text.resizeTextForBestFit = true;
             text.text = item.text;
             textObj.GetComponent<RectTransform>().SetParent(itemObj.transform);
+            textObj.transform.Translate(new Vector3(Xoffset, Yoffset, 0));
             textObj.transform.Translate(new Vector3(0, -1 * imageObj.GetComponent<RectTransform>().rect.height, 0));
             textObj.SetActive(true);
 
