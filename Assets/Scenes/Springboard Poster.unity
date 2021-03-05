@@ -552,7 +552,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemCollection: []
-  springLength: 30
+  springLength: 100
   springk: 12.2
   repulsion: 0.005
   damping: 0.005
