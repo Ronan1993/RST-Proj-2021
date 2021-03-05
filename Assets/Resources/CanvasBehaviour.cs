@@ -147,7 +147,6 @@ public class CanvasBehaviour : MonoBehaviour
         }
     }
 
-
     void AllocateTransitionRatings(Item item)
     {
         // Set rankings for each possible path of current item
@@ -269,7 +268,6 @@ public class CanvasBehaviour : MonoBehaviour
         }
         return nextItem;
     }
-
 
     Item TieBreak(List<Item> possibleItems)
     {

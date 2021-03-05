@@ -31,6 +31,7 @@ public class UISpringGraphLayout : MonoBehaviour {
 		public Node n1;
 		public Node n2;
         public float weight;
+        public float lengthVar;
 		public Edge(Node _n1, Node _n2){
 			n1 = _n1;
 			n2 = _n2;
@@ -200,9 +201,14 @@ public class UISpringGraphLayout : MonoBehaviour {
         }
 
         Edge e = new Edge(n1, n2);
+        Item item1 = itemCollection[nodes.IndexOf(n1)];
+        Item item2 = itemCollection[nodes.IndexOf(n2)];
+        e.lengthVar = CalculateLengthVariance(item1, item2);
+
         edges.Add(e);
         n1.adjacentNodes.Add(n2);
         n2.adjacentNodes.Add(n1);
+
         return e;
     }
 
@@ -262,6 +268,13 @@ public class UISpringGraphLayout : MonoBehaviour {
             {
                 continue;
             }
+            // Later addition
+
+
+            springLength = springLength * e.lengthVar;
+
+            // End
+
             Vector2 d = e.n2.position  - e.n1.position;
 			float displacement = springLength - d.magnitude;
             Vector2 direction = d.normalized;
@@ -271,7 +284,44 @@ public class UISpringGraphLayout : MonoBehaviour {
 		}
 	}
 
-	void ApplyColombsLaw()
+
+    float CalculateLengthVariance(Item item1, Item item2)
+    {
+        foreach (Relation relation in item1.relations)
+        {
+            if (item2.itemID == relation.otherItem)
+            {
+                if (relation.relationName == "preparation")
+                {
+                    return 0.2f;
+                }
+
+                if ((relation.relationName == "sequence") || (relation.relationName == "joint"))
+                {
+                    return 0.25f;
+                }
+
+                else if (relation.relationName == "contrast")
+                {
+                    return 0.33f;
+                }
+
+                if (relation.relationName == "background")
+                {
+                    return 0.45f;
+                }
+
+                if((relation.relationName == "evidence") || (relation.relationName == "evaluation"))
+                {
+                    return 0.5f;
+                }
+            }
+        }
+        return 0f;
+    }
+
+
+    void ApplyColombsLaw()
     {
 		foreach (var n1 in nodes){
 			foreach (var n2 in nodes){
